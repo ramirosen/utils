@@ -1,0 +1,282 @@
+#!/bin/sh
+
+[ -z $1 ] && echo "usage : errno errNumber" && exit 1
+
+case "$1" in
+1) echo "EPERM		 1	/* Operation not permitted */"
+    ;;	
+2) echo "ENOENT		 2	/* No such file or directory */"
+    ;;	
+3) echo "ESRCH		 3	/* No such process */ "
+    ;;	
+4) echo "EINTR		 4	/* Interrupted system call */ "
+    ;;	
+5) echo "EIO		 5	/* I/O error */ "
+    ;;	
+6) echo "ENXIO		 6	/* No such device or address */"
+;;
+7) echo "E2BIG		 7	/* Argument list too long */"
+    ;;	
+8) echo "ENOEXEC		 8	/* Exec format error */"
+    ;;	
+9) echo "EBADF		 9	/* Bad file number */"
+    ;;	
+10) echo "ECHILD		10	/* No child processes */"
+    ;;	
+11) echo "EAGAIN		11	/* Try again */  (also EWOULDBLOCK)"
+    ;;	
+12) echo "ENOMEM		12	/* Out of memory */"
+    ;;	
+13) echo "EACCES		13	/* Permission denied */"
+    ;;	
+14) echo "EFAULT		14	/* Bad address */"
+    ;;	
+15) echo "ENOTBLK		15	/* Block device required */"
+    ;;	
+16) echo "EBUSY		16	/* Device or resource busy */"
+    ;;
+17) echo "EEXIST		17	/* File exists */"
+    ;;	
+18) echo "EXDEV		18	/* Cross-device link */"
+    ;;	
+19) echo "ENODEV		19	/* No such device */"
+    ;;	
+20) echo "ENOTDIR		20	/* Not a directory */"
+    ;;	
+21) echo "EISDIR		21	/* Is a directory */"
+    ;;	
+22) echo "EINVAL		22	/* Invalid argument */"
+    ;;	
+23) echo "ENFILE		23	/* File table overflow */"
+    ;;	
+24) echo "EMFILE		24	/* Too many open files */"
+    ;;	
+25) echo "ENOTTY		25	/* Not a typewriter */"
+    ;;	
+26) echo "ETXTBSY		26	/* Text file busy */"
+    ;;	
+27) echo "EFBIG		27	/* File too large */"
+    ;;	
+28) echo "ENOSPC		28	/* No space left on device */"
+    ;;	
+29) echo "ESPIPE		29	/* Illegal seek */"
+    ;;	
+30) echo "EROFS		30	/* Read-only file system */"
+    ;;	
+31) echo "EMLINK		31	/* Too many links */"
+    ;;	
+32) echo "EPIPE		32	/* Broken pipe */"
+    ;;	
+33) echo "EDOM		33	/* Math argument out of domain of func */"
+    ;;	
+34) echo "ERANGE		34	/* Math result not representable */"
+    ;;	
+35)  echo "EDEADLK - Resource deadlock would occur (also EDEADLOCK)" 
+    ;;
+36)  echo "ENAMETOOLONG - File name too long "
+    ;;
+37) echo "ENOLCK  - No record locks available"
+    ;;
+38) echo "ENOSYS -Function not implemented"
+    ;;	
+39) echo "ENOTEMPTY-  Directory not empty"
+    ;;	
+40) echo "ELOOP 40 Too many symbolic links encountered"
+    ;;	
+41) echo "41 (missing errno)"
+   ;;	
+43) echo "EIDRM		43	/* Identifier removed */"
+    ;;	
+44) echo "ECHRNG		44	/* Channel number out of range */"
+    ;;	
+45) echo "EL2NSYNC	45	/* Level 2 not synchronized */ "
+    ;;	
+46) echo "EL3HLT		46	/* Level 3 halted */ "
+    ;;
+47) echo "EL3RST		47	/* Level 3 reset */"
+    ;;	
+48) echo "ELNRNG		48	/* Link number out of range */"
+    ;;	
+49) echo "EUNATCH		49	/* Protocol driver not attached */"
+    ;;	
+50) echo "ENOCSI		50	/* No CSI structure available */"
+    ;;	
+51) echo "EL2HLT		51	/* Level 2 halted */"
+    ;;	
+52) echo "EBADE		52	/* Invalid exchange */"
+    ;;	
+53) echo "EBADR		53	/* Invalid request descriptor */"
+    ;;	
+54) echo "EXFULL		54	/* Exchange full */"
+    ;;	
+55) echo "ENOANO		55	/* No anode */"
+    ;;	
+56) echo "EBADRQC		56	/* Invalid request code */"
+    ;;	
+57) echo "EBADSLT		57	/* Invalid slot */"
+    ;;	
+58) echo "58  (missing errno)"
+    ;;	    
+59) echo "EBFONT		59	/* Bad font file format */"
+    ;;	
+60) echo "ENOSTR		60	/* Device not a stream */"
+    ;;	
+61) echo "ENODATA		61	/* No data available */"
+    ;;	
+62) echo "ETIME		62	/* Timer expired */"
+    ;;	
+63) echo "ENOSR		63	/* Out of streams resources */"
+    ;;	
+64) echo "ENONET		64	/* Machine is not on the network */"
+    ;;	
+65) echo "ENOPKG		65	/* Package not installed */"
+    ;;	
+66) echo "EREMOTE		66	/* Object is remote */"
+    ;;	
+67) echo "ENOLINK		67	/* Link has been severed */"
+    ;;	
+68) echo "EADV		68	/* Advertise error */"
+    ;;	
+69) echo "ESRMNT		69	/* Srmount error */"
+    ;;	
+70) echo "ECOMM		70	/* Communication error on send */"
+    ;;	
+71) echo "EPROTO		71	/* Protocol error */"
+    ;;	
+72) echo "EMULTIHOP	72	/* Multihop attempted */"
+    ;;	
+73) echo "EDOTDOT		73	/* RFS specific error */"
+    ;;	
+74) echo "EBADMSG		74	/* Not a data message */"
+    ;;	
+75) echo "EOVERFLOW	75	/* Value too large for defined data type */"
+    ;;	
+76) echo "ENOTUNIQ	76	/* Name not unique on network */"
+    ;;	
+77) echo "EBADFD		77	/* File descriptor in bad state */"
+    ;;	
+78) echo "EREMCHG		78	/* Remote address changed */"
+    ;;	
+79) echo "ELIBACC		79	/* Can not access a needed shared library */"
+    ;;	
+80) echo "ELIBBAD		80	/* Accessing a corrupted shared library */"
+    ;;	
+81) echo "ELIBSCN		81	/* .lib section in a.out corrupted */"
+    ;;	
+82) echo "ELIBMAX		82	/* Attempting to link in too many shared libraries */"
+    ;;	
+83) echo "ELIBEXEC	83	/* Cannot exec a shared library directly */"
+    ;;	
+84) echo "EILSEQ		84	/* Illegal byte sequence */"
+    ;;	
+85) echo "ERESTART	85	/* Interrupted system call should be restarted */"
+    ;;	
+86) echo "ESTRPIPE	86	/* Streams pipe error */"
+    ;;	
+87) echo "EUSERS		87	/* Too many users */"
+    ;;	
+88) echo "ENOTSOCK	88	/* Socket operation on non-socket */"
+    ;;	
+89) echo "EDESTADDRREQ	89	/* Destination address required */"
+    ;;	
+90) echo "EMSGSIZE	90	/* Message too long */"
+    ;;	
+91) echo "EPROTOTYPE	91	/* Protocol wrong type for socket */"
+    ;;	
+92) echo "ENOPROTOOPT	92	/* Protocol not available */"
+    ;;	
+93) echo "EPROTONOSUPPORT	93	/* Protocol not supported */"
+    ;;	
+94) echo "ESOCKTNOSUPPORT	94	/* Socket type not supported */"
+    ;;	
+95) echo "EOPNOTSUPP	95	/* Operation not supported on transport endpoint */"
+    ;;	
+96) echo "EPFNOSUPPORT	96	/* Protocol family not supported */"
+    ;;	
+97) echo "EAFNOSUPPORT	97	/* Address family not supported by protocol */"
+    ;;	
+98) echo "EADDRINUSE	98	/* Address already in use */"
+    ;;	
+99) echo "EADDRNOTAVAIL	99	/* Cannot assign requested address */"
+    ;;	
+100) echo "ENETDOWN	100	/* Network is down */"
+    ;;	
+101) echo "ENETUNREACH	101	/* Network is unreachable */"
+    ;;	
+102) echo "ENETRESET	102	/* Network dropped connection because of reset */"
+    ;;	
+103) echo "ECONNABORTED	103	/* Software caused connection abort */"
+    ;;	
+104) echo "ECONNRESET	104	/* Connection reset by peer */"
+    ;;	
+105) echo "ENOBUFS		105	/* No buffer space available */"
+    ;;	
+106) echo "EISCONN		106	/* Transport endpoint is already connected */"
+    ;;	
+107) echo "ENOTCONN	107	/* Transport endpoint is not connected */"
+    ;;	
+108) echo "ESHUTDOWN	108	/* Cannot send after transport endpoint shutdown */"
+    ;;	
+109) echo "ETOOMANYREFS	109	/* Too many references: cannot splice */"
+    ;;	
+110) echo "ETIMEDOUT	110	/* Connection timed out */"
+    ;;	
+111) echo "ECONNREFUSED	111	/* Connection refused */"
+    ;;	
+112) echo "EHOSTDOWN	112	/* Host is down */"
+    ;;	
+113) echo "EHOSTUNREACH	113	/* No route to host */"
+    ;;	
+114) echo "EALREADY	114	/* Operation already in progress */"
+    ;;	
+115) echo "EINPROGRESS	115	/* Operation now in progress */"
+    ;;	
+116) echo "ESTALE		116	/* Stale file handle */"
+    ;;	
+117) echo "EUCLEAN		117	/* Structure needs cleaning */"
+    ;;	
+118) echo "ENOTNAM		118	/* Not a XENIX named type file */"
+    ;;	
+119) echo "ENAVAIL		119	/* No XENIX semaphores available */"
+    ;;	
+120) echo "EISNAM		120	/* Is a named type file */"
+    ;;	
+121) echo "EREMOTEIO	121	/* Remote I/O error */"
+    ;;	
+122) echo "EDQUOT		122	/* Quota exceeded */"
+    ;;	
+123) echo "ENOMEDIUM	123	/* No medium found */"
+    ;;	
+124) echo "EMEDIUMTYPE	124	/* Wrong medium type */"
+    ;;	
+125) echo "ECANCELED	125	/* Operation Canceled */"
+    ;;	
+126) echo "ENOKEY		126	/* Required key not available */"
+    ;;	
+127) echo "EKEYEXPIRED	127	/* Key has expired */"
+    ;;	
+128) echo "EKEYREVOKED	128	/* Key has been revoked */"
+    ;;	
+129) echo "EKEYREJECTED	129	/* Key was rejected by service */"
+    ;;	
+130) echo "EOWNERDEAD	130	/* Owner died */"
+    ;;	
+131) echo "ENOTRECOVERABLE	131	/* State not recoverable */"
+    ;;	
+132) echo "ERFKILL		132	/* Operation not possible due to RF-kill */"
+    ;;	
+133) echo "EHWPOISON	133	/* Memory page has hardware error */"
+    ;;	
+esac
+
+
+
+
+
+
+
+
+
+
+
+
