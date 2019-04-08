@@ -267,6 +267,10 @@ case "$1" in
     ;;	
 133) echo "EHWPOISON	133	/* Memory page has hardware error */"
     ;;	
+    
+*) echo "No such errno!"
+    ;;
+
 esac
 
 
