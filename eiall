@@ -1,0 +1,72 @@
+#!/bin/bash
+
+source /work/tools/scripts/env.sh
+#echo -e $GREEN in eiall $NC
+for filename in /sys/class/net/*; do
+    NETDEV=`basename $filename`
+    if [ "$NETDEV" != "lo" ] && [ "$NETDEV" != "wlan0" ] ; then
+	echo -n  -e $GREEN $NETDEV " "$NC
+        BUS=`ethtool -i $NETDEV | grep bus | cut -d' ' -f2`
+	#DRIVER=`ethtool -i $NETDEV | grep driver`
+	DRIVER=`ethtool -i $NETDEV | grep driver | cut -d':'  -f2`	
+#        echo -n $BUS $DRIVER
+         if [ "$BUS" == "N/A" ] || [ "$BUS" == "tap" ];  then 
+         	echo -n "               "
+         else
+#         	 echo -n $BUS " "
+         	 echo -n $BUS "     "         	 
+        fi
+#        printf "%8s" $DRIVER
+        printf "%8s" $DRIVER        
+
+    #LINK=`ethtool $NETDEV | tail -n 1 | cut -d' ' -f3`
+    LINK=`ifconfig 2> /dev/null $NETDEV | head -1 | grep UP` 
+    if [ $? -eq 0 ]; then
+    	printf ' \e[1;32m%-4s\e[m' "UP    "
+#    	RUNNING=`ifconfig 2> /dev/null $NETDEV | head -1 | grep RUNNING`    	
+#    	if [ $? -eq 0 ]; then
+#    		printf ' \e[1;32m%-6s\e[m' "RUNNING "
+#    	else
+#    		printf ' \e[1;32m%-6s\e[m' "		        "    	
+#    	fi
+    	
+    else
+    	#printf ' \e[1;31m%-6s\e[m' "DOWN"
+#    	printf ' \e[1;31m%-6s\e[m' "DOWN           "
+    	printf ' \e[1;31m%-6s\e[m' "DOWN"    	
+    fi
+
+    
+    VENDORID=''
+    DEVICEID=''
+#    [ -e /sys/class/net/$NETDEV/device/device ]   && DEVICEID=`cat /sys/class/net/$NETDEV/device/device`
+#    [ -e  /sys/class/net/$NETDEV/device/vendor ]  && VENDORID=`cat /sys/class/net/$NETDEV/device/vendor`
+    [ -e /sys/class/net/$NETDEV/device/device ] && DEVICEID=`sed 's/^0x//' /sys/class/net/$NETDEV/device/device`
+    [ -e  /sys/class/net/$NETDEV/device/vendor ] && VENDORID=`sed 's/^0x//' /sys/class/net/$NETDEV/device/vendor`
+ 
+    [ ! -z $VENDORID ] &&  echo -n $VENDORID:$DEVICEID
+
+    IPADDR=""
+    if [ "$NETDEV" != "ib0" ] ; then
+    	IPADDR=`ifconfig 2> /dev/null $NETDEV | grep inet | grep -v inet6 | cut -d ' ' -f10` 
+    fi
+    [ ! -z $IPADDR ] && echo -e $YEL $IPADDR $NC
+    LINK=`ifconfig 2> /dev/null $NETDEV | head -1 | grep UP` 
+    if [ $? -eq 0 ]; then
+  #  	printf ' \e[1;32m%-4s\e[m' "UP"
+    	RUNNING=`ifconfig 2> /dev/null $NETDEV | head -1 | grep RUNNING`    	
+    	if [ $? -eq 0 ]; then
+    		printf ' \e[1;32m%-6s\e[m' "RUNNING "
+    	else
+    		printf ' \e[1;32m%-6s\e[m' "		        "    	
+    	fi
+    	
+#    else
+    	#printf ' \e[1;31m%-6s\e[m' "DOWN"
+    	#printf ' \e[1;31m%-6s\e[m' "DOWN           "    	
+    fi
+
+    echo
+    
+    fi
+done
