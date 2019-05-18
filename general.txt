@@ -1,0 +1,7 @@
+General info:
+##############
+
+Builiding qemu for x86_64 platform (only):
+
+./configure --target-list=x86_64-softmmu 
+
