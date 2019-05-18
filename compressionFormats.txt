@@ -1,0 +1,8 @@
+Folllowing is a list of commands to create a compressed file:
+
+tar czvf myproject.tgz 	myproject 
+tar caf myproject.lzma  myproject
+tar caf myproject.xz    myproject 
+tar caf myproject.bz2   myproject
+
+zip -r myproject.zip 	myproject
