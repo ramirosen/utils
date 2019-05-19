@@ -1,0 +1,89 @@
+#!/bin/sh
+
+/work/tools/scripts/env.sh
+CMDLINE=`cat /proc/cmdline` >> /dev/null
+#if echo ${CMDLINE} | grep "iommu" ; then
+#if grep ${CMDLINE} "iommu" ; then
+#    echo "iommu included in /proc/cmdline"
+#	continue
+#else
+#    echo "iommu not included in /proc/cmdline"
+#fi
+
+
+lsmod | grep uio >> /dev/null
+if [ $? -ne 0 ]; then
+    printf ' \e[1;41m%-6s\e[m' "uio is not insmoded" && echo
+fi
+lsmod | grep igb_uio >> /dev/null
+if [ $? -ne 0 ]; then
+    printf ' \e[1;41m%-6s\e[m' "igb_uio is not insmoded" && echo
+fi
+
+
+if echo ${CMDLINE} | grep "hugepages" > /dev/null ; then
+	printf ' \e[1;42m%-6s\e[m' "hugepages included" && echo
+	continue
+else
+    #echo "hugepages not included in /proc/cmdline"
+    printf ' \e[1;41m%-6s\e[m' "hugepages not included" && echo    
+fi
+
+
+cat /proc/cmdline | grep ipv6_disable
+[ $? -eq 0 ] && printf ' \e[1;31m%-6s\e[m' "please check if ipv6 is disabled by cat /proc/cmdline"
+#PROXY=`env | grep proxy | grep http`
+
+#[ -z "$PROXY" ] && echo "No http proxy in env variables"
+
+
+#cat /opt/contrail/utils/fabfile/testbeds/testbed.py | grep
+
+route -n | grep 169.254 >> /dev/null
+[ $? -eq 0 ] && printf ' \e[1;41m%-6s\e[m' "169.254 addresses exist" && echo
+#iptables -L
+
+#echo "calling getenforce"
+getenforce > /dev/null
+#set RES='getenforce'
+#echo $RES
+## $RES -eq 0 ] && printf ' \e[1;32m%-6s\e[m' "selinux is disabled" && echo
+[ $? -eq 1 ] && printf ' \e[1;31m%-6s\e[m' "selinux is enabled" && echo
+#echo "calling systemctl is-enabled avahi-daemon"
+SERVICE=avahi-daemon
+systemctl is-enabled $SERVICE &> /dev/null
+[ $? -eq 0 ] &&   printf ' \e[1;31m%-6s\e[m' "$SERVICE is enabled!" && echo    
+
+SERVICE=auditd
+systemctl is-enabled $SERVICE >& /dev/null
+[ $? -eq 0 ] &&   printf ' \e[1;31m%-6s\e[m' "$SERVICE is enabled!" && echo    
+
+SERVICE=NetworkManager
+systemctl is-enabled $SERVICE &> /dev/null 
+[ $? -eq 0 ] &&   printf ' \e[1;31m%-6s\e[m' "$SERVICE is enabled!" && echo    
+
+SERVICE=firewalld
+systemctl is-enabled $SERVICE > /dev/null 
+[ $? -eq 0 ] &&   printf ' \e[1;31m%-6s\e[m' "$SERVICE is enabled!" && echo    
+
+SERVICE=openibd
+systemctl is-enabled $SERVICE > /dev/null 
+[ $? -eq 0 ] &&   printf ' \e[1;31m%-6s\e[m' "$SERVICE is enabled!" && echo    
+
+ps aux | grep avahi | grep -v grep > /dev/null
+[ $? -eq 0 ] && printf ' \e[1;41m%-6s\e[m' "avahi process runs"  && echo
+
+ps aux | grep NetworkManager  | grep -v grep  > /dev/null
+[ $? -eq 0 ] && printf ' \e[1;41m%-6s\e[m' "NetworkManager process runs"  && echo
+
+#rpm -q PolicyKit >> /dev/null
+#[ $? -eq 0 ] && printf ' \e[1;41m%-6s\e[m' "PolicyKit is installed"  && echo
+
+rpm -q polkit >> /dev/null
+[ $? -eq 0 ] && printf ' \e[1;41m%-6s\e[m' "polkit is installed"  && echo
+
+rpm -q numactl-devel >> /dev/null
+[ ! $? -eq 0 ] && printf ' \e[1;41m%-6s\e[m' "numactl-devel is not installed"  && echo
+
+rpm -q kernel-devel >> /dev/null
+[ ! $? -eq 0 ] && printf ' \e[1;41m%-6s\e[m' "kernel-devel is not installed"  && echo
