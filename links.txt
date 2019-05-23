@@ -1,0 +1,3 @@
+keyboard-indicator (Caps Lock and more) for Windows:
+http://roidayan.com/keyboard-indicator/
+
